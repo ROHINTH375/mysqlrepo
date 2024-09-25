@@ -1,0 +1,226 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\rohin> mongosh
+Current Mongosh Log ID: 66f42db10341e08f95c73bf7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.1
+Using MongoDB:          8.0.0
+Using Mongosh:          2.3.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-09-25T13:53:36.912+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use assignment
+switched to db assignment
+assignment> db.createcollection("user")
+TypeError: db.createcollection is not a function
+assignment> db.createCollection("user")
+{ ok: 1 }
+assignment> db.users.insertMany([{ _id: ObjectId("user1"), name: "John Doe", email: "john@example.com" },{ _id: ObjectId("user2"), naname: "Jane Doe", email: "jane@example.com" }]);
+BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+assignment> db.users.insertMany([{ name: "John Doe", email: "john@example.com" },{ name: "Jane Doe", email: "jane@example.com" }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42e8b0341e08f95c73bf8'),
+    '1': ObjectId('66f42e8b0341e08f95c73bf9')
+  }
+}
+assignment> db.createCollection("codekata")
+{ ok: 1 }
+assignment> db.codekata.insertMany([
+...   { user_id: ObjectId(), problem_count: 50 },
+...   { user_id: ObjectId(), problem_count: 30 }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42ea90341e08f95c73bfc'),
+    '1': ObjectId('66f42ea90341e08f95c73bfd')
+  }
+}
+assignment> db.createCollection("attendance")
+{ ok: 1 }
+assignment> db.attendance.insertMany([{ user_id: ObjectId(), date: ISODate("2020-10-16"), status: "absent" },{ user_id: ObjectId(), ddate: ISODate("2020-10-20"), status: "present" }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42ee30341e08f95c73c00'),
+    '1': ObjectId('66f42ee30341e08f95c73c01')
+  }
+}
+assignment> db.createCollection("topics")
+{ ok: 1 }
+assignment> db.topics.insertMany([{ title: "MongoDB Basics", date: ISODate("2020-10-12") },{ title: "NodeJS", date: ISODate("2020-10-25") }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42f140341e08f95c73c02'),
+    '1': ObjectId('66f42f140341e08f95c73c03')
+  }
+}
+assignment> db.createCollection("tasks")
+{ ok: 1 }
+assignment> db.tasks.insertMany([{ title: "Database Design", user_id: ObjectId(), date_assigned: ISODate("2020-10-12"), status: "submitted" },{ title: "REST API", user_id: ObjectId(), date_assigned: ISODate("2020-10-25"), status: "not submitted" }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42f450341e08f95c73c06'),
+    '1': ObjectId('66f42f450341e08f95c73c07')
+  }
+}
+assignment> db.createCollection("company_drives")
+{ ok: 1 }
+assignment> db.company_drives.insertMany([{ company_name: "Google", date: ISODate("2020-10-20"), appeared_students: [ObjectId()] },{ company_name: "Amazon", date: ISODate("2020-10-26"), appeared_students: [ObjectId()] }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42f7f0341e08f95c73c0a'),
+    '1': ObjectId('66f42f7f0341e08f95c73c0b')
+  }
+}
+assignment> db.createCollection("mentors")
+{ ok: 1 }
+assignment> db.mentors.insertMany([{ name: "Jane Smith", mentee_count: 20, mentees: [ObjectId(), ObjectId()] },{ name: "Tom Brown", m
+entee_count: 10, mentees: [ObjectId()] }]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f42fbb0341e08f95c73c0f'),
+    '1': ObjectId('66f42fbb0341e08f95c73c10')
+  }
+}
+assignment> db.topics.find({ "date": { $gte: ISODate("2020-10-01"), $lt: ISODate("2020-11-01") } });
+[
+  {
+    _id: ObjectId('66f42f140341e08f95c73c02'),
+    title: 'MongoDB Basics',
+    date: ISODate('2020-10-12T00:00:00.000Z')
+  },
+  {
+    _id: ObjectId('66f42f140341e08f95c73c03'),
+    title: 'NodeJS',
+    date: ISODate('2020-10-25T00:00:00.000Z')
+  }
+]
+assignment> db.tasks.find({ "date_assigned": { $gte: ISODate("2020-10-01"), $lt: ISODate("2020-11-01") } });
+[
+  {
+    _id: ObjectId('66f42f450341e08f95c73c06'),
+    title: 'Database Design',
+    user_id: ObjectId('66f42f450341e08f95c73c04'),
+    date_assigned: ISODate('2020-10-12T00:00:00.000Z'),
+    status: 'submitted'
+  },
+  {
+    _id: ObjectId('66f42f450341e08f95c73c07'),
+    title: 'REST API',
+    user_id: ObjectId('66f42f450341e08f95c73c05'),
+    date_assigned: ISODate('2020-10-25T00:00:00.000Z'),
+    status: 'not submitted'
+  }
+]
+assignment> db.company_drives.find({ "date": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") } });
+[
+  {
+    _id: ObjectId('66f42f7f0341e08f95c73c0a'),
+    company_name: 'Google',
+    date: ISODate('2020-10-20T00:00:00.000Z'),
+    appeared_students: [ ObjectId('66f42f7f0341e08f95c73c08') ]
+  },
+  {
+    _id: ObjectId('66f42f7f0341e08f95c73c0b'),
+    company_name: 'Amazon',
+    date: ISODate('2020-10-26T00:00:00.000Z'),
+    appeared_students: [ ObjectId('66f42f7f0341e08f95c73c09') ]
+  }
+]
+assignment> db.company_drives.aggregate([{$lookup: {from: "users", localField: "appeared_students", foreignField: "_id", as: "students"}}]);
+[
+  {
+    _id: ObjectId('66f42f7f0341e08f95c73c0a'),
+    company_name: 'Google',
+    date: ISODate('2020-10-20T00:00:00.000Z'),
+    appeared_students: [ ObjectId('66f42f7f0341e08f95c73c08') ],
+    students: []
+  },
+  {
+    _id: ObjectId('66f42f7f0341e08f95c73c0b'),
+    company_name: 'Amazon',
+    date: ISODate('2020-10-26T00:00:00.000Z'),
+    appeared_students: [ ObjectId('66f42f7f0341e08f95c73c09') ],
+    students: []
+  }
+]
+assignment> db.codekata.aggregate([{ $group: { _id: "$user_id", total_problems_solved: { $sum: "$problem_count" } } }]);
+[
+  {
+    _id: ObjectId('66f42ea90341e08f95c73bfa'),
+    total_problems_solved: 50
+  },
+  {
+    _id: ObjectId('66f42ea90341e08f95c73bfb'),
+    total_problems_solved: 30
+  }
+]
+assignment> db.mentors.find({ "mentee_count": { $gt: 15 } });
+[
+  {
+    _id: ObjectId('66f42fbb0341e08f95c73c0f'),
+    name: 'Jane Smith',
+    mentee_count: 20,
+    mentees: [
+      ObjectId('66f42fbb0341e08f95c73c0c'),
+      ObjectId('66f42fbb0341e08f95c73c0d')
+    ]
+  }
+]
+assignment> db.attendance.aggregate(["date": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") },"status": "absent"]);
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.attendance.aggregate(["date": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") },"status": "absent"]);
+    |                                ^
+  2 |
+
+assignment> db.attendance.aggregate([
+...   {
+...     $match: {
+...       "date": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") },
+...       "status": "absent"
+...     }
+...   },
+...   {
+...     $lookup: {
+...       from: "tasks",
+...       localField: "user_id",
+...       foreignField: "user_id",
+...       as: "unsubmitted_tasks"
+...     }
+...   },
+...   {
+...     $unwind: "$unsubmitted_tasks"
+...   },
+...   {
+...     $match: {
+...       "unsubmitted_tasks.status": "not submitted",
+...       "unsubmitted_tasks.date_assigned": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }
+...     }
+...   },
+...   {
+...     $project: {
+...       user_id: 1,
+...       task_title: "$unsubmitted_tasks.title"
+...     }
+...   }
+... ]);
+
+assignment> db.attendance.aggregate([ { $match: { "date": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }, "status": "absent" } }, { $lookup: { from: "tasks", localField: "user_id", foreignField: "user_id", as: "unsubmitted_tasks" } }, { $unwind: "$unsubmitted_tasks" }, { $match: { "unsubmitted_tasks.status": "not submitted", "unsubmitted_tasks.date_assigned": { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") } } }, { $project: { user_id: 1, task_title: "$unsubmitted_tasks.title" } }] );
+
+assignment>
